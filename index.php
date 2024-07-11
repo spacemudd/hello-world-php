@@ -1,3 +1,5 @@
+<title>Hello World</title>
+
 <?php
 
 require __DIR__.'/vendor/autoload.php';
