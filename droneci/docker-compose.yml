@@ -6,9 +6,9 @@ services:
             db:
                 condition: service_healthy
         environment:
-        - DRONE_SERVER_HOST=localhost
+        - DRONE_SERVER_HOST=${DRONE_SERVER_HOST}
         - DRONE_SERVER_PROTO=http
-        - DRONE_SERVER_PROXY_HOST=${DRONE_SERVER_PROXY_HOST}
+        #- DRONE_SERVER_PROXY_HOST=${DRONE_SERVER_PROXY_HOST}
         - DRONE_SERVER_PROXY_PROTO=http
         - DRONE_RPC_SECRET=bea26a2221fd8090ea38720fc445eca6
         - DRONE_COOKIE_SECRET=e8206356c843d81e05ab6735e7ebf075
@@ -23,9 +23,9 @@ services:
     droneb:
         image: drone/drone:latest
         environment:
-        - DRONE_SERVER_HOST=localhost
+        - DRONE_SERVER_HOST=${DRONE_SERVER_HOST}
         - DRONE_SERVER_PROTO=http
-        - DRONE_SERVER_PROXY_HOST=${DRONE_SERVER_PROXY_HOST}
+        #- DRONE_SERVER_PROXY_HOST=${DRONE_SERVER_PROXY_HOST}
         - DRONE_SERVER_PROXY_PROTO=https
         - DRONE_RPC_SECRET=bea26a2221fd8090ea38720fc445eca6
         - DRONE_COOKIE_SECRET=e8206356c843d81e05ab6735e7ebf075
