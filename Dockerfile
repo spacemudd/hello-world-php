@@ -1,4 +1,7 @@
-FROM trafex/php-nginx:latest
+#!/usr/bin/env bash
+# --platform=linux/amd64 is necessary because if the Docker image was built on a Mac M chip, it would create errors
+# when deployed on the prod cluster.
+FROM --platform=linux/amd64 trafex/php-nginx:latest
 
 COPY --chown=nobody . /var/www/html
 RUN mkdir -p /var/run/php && \

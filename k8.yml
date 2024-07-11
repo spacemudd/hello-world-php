@@ -1,0 +1,37 @@
+# k8.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-php
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-world-php
+  template:
+    metadata:
+      labels:
+        app: hello-world-php
+    spec:
+      containers:
+        - name: backend
+          image: me-jeddah-1.ocir.io/axjwpjxefzql/hello-world-php/backend:latest
+          ports:
+            - containerPort: 80
+          stdin: true
+          tty: true
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-php-lb
+spec:
+  selector:
+    app: hello-world-php
+  type: LoadBalancer
+  ports:
+    - name: backend
+      port: 80
+      targetPort: 8080
+      protocol: TCP

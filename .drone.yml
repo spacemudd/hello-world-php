@@ -1,9 +1,34 @@
 kind: pipeline
-type: kubernetes
+type: docker
 name: default
 
 steps:
-- name: install
-  image: trafex/php-nginx:latest
+
+- name: install composer
+  image: composer
   commands:
   - composer install
+
+- name: install php
+  image: php:8
+  environment:
+    SECRETAPIKEY:
+      from_secret: ACME_SECRET_KEY
+  commands:
+  - php -v
+  - cp .env.example .env
+  - sed -i "s/^\(CURRENT_COMMIT_HASH=\).*/\1CURRENT_COMMIT_HASH=${DRONE_COMMIT}/" .env
+  - sed -i "s/^\(SECRET_API_KEY=\).*/\1SECRET_API_KEY=${SECRETAPIKEY}/" .env
+
+
+- name: deploy to production
+  image: appleboy/drone-scp
+  script:
+    - echo "Deploying to production"
+    - sh deploy.sh
+
+trigger:
+  branch:
+    - develop
+    - main
+    - feature/*
