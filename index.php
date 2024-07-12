@@ -10,5 +10,5 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 echo "Hello World!";
-echo "\n\r";
-echo $_ENV['VERSION'];
+echo "\n\n";
+echo $_ENV['CURRENT_COMMIT_HASH'];

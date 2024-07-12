@@ -12,6 +12,8 @@ This project is responsible for printing "Hello World".
 
 This project is deployed on commit.
 
+The file 'deploy.sh' is responsible for deploying the project to the K8 cluster.
+
 # Support
 
 Please contact shafiqalshaar@gmail.com
